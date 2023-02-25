@@ -2,28 +2,23 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
 
-  networking.hostName = "pc"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.hostName = "pc";
+  networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Ljubljana";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   # console = lib.mkForce {
   #  font = "Lat2-Terminus16";
@@ -31,8 +26,9 @@
   #  useXkbConfig = true; # use xkbOptions in tty.
   #};
 
-  # Enable the X11 windowing system.
   environment.pathsToLink = [ "/libexec" ];
+
+  # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     desktopManager = {
@@ -83,33 +79,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
     i3
-    alacritty
-    chromium
-    google-chrome
-    pass
-    git
     polybar
     picom
-    slack
     pinentry-curses
-    vscode
-    fzf
-    sumneko-lua-language-server
-    selene
-    lazygit
-    stylua
-    gcc
-    ripgrep 
-    deluge
-    pavucontrol
   ];
- 
-  fonts.fonts = with pkgs; [
-  (nerdfonts.override { fonts = [ "FiraMono" ]; })
-  ];  
 
   nixpkgs.config.allowUnfree = true;
 
