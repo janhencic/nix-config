@@ -35,6 +35,11 @@ in
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim
+      tree
+      tmux
+      shellcheck
+      jq
+      htop
     ];
   };
   
