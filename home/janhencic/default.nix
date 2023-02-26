@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let 
+  jan_nvim = import ./nvim/default.nix { inherit pkgs; };
+in
 {
   nixpkgs = {
     config = {
@@ -32,6 +34,7 @@
       slack
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      jan_nvim
     ];
   };
   
