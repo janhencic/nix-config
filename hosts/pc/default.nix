@@ -1,9 +1,11 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   imports =
     [
+      inputs.home-manager.nixosModules.home-manager
       ./hardware-configuration.nix
+      ./users/janhencic
     ];
 
   boot.loader.systemd-boot.enable = true;
