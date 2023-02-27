@@ -3,6 +3,10 @@ let
   jan_nvim = import ./nvim/default.nix { inherit pkgs; };
 in
 {
+  imports = [
+    ./i3
+  ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;
