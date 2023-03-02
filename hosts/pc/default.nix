@@ -33,6 +33,19 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
+    desktopManager = {
+      xterm.enable = false;
+    };
+   
+    libinput.enable = true;
+    displayManager.lightdm.enable = true;
+    displayManager.session = [
+      {
+        manage = "desktop";
+        name = "xsession";
+        start = ''exec $HOME/.xsession'';
+      }
+    ];
   };  
 
   # Configure keymap in X11
@@ -48,9 +61,6 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
