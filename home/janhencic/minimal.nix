@@ -4,11 +4,9 @@ let
 in
 {
   imports = [
-    ./alacritty.nix
     ./bash.nix
     ./fzf.nix
     ./git.nix
-    ./i3
   ];
 
   nixpkgs = {
@@ -26,8 +24,6 @@ in
     stateVersion = "22.11";
 
     packages = with pkgs; [
-      alacritty
-      chromium
       pass
       git
       sumneko-lua-language-server
@@ -37,8 +33,6 @@ in
       ripgrep 
       deluge
       pavucontrol
-      google-chrome
-      slack
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim
