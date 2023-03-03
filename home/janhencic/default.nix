@@ -26,7 +26,6 @@ in
       chromium
       pass
       git
-      fzf
       sumneko-lua-language-server
       selene
       lazygit
@@ -106,5 +105,14 @@ in
         underline = {};
       };
     };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
+  programs.bash = {
+    enable = true;
   };
 }
