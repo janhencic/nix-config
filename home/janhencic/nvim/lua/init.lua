@@ -102,6 +102,12 @@ wk.register({
       end,
       'rename variable or struct',
     },
+    v = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      'show varible type under cursor',
+    },
   },
   g = {
     g = {
