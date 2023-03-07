@@ -30,5 +30,13 @@
         modules = [ ./home/janhencic/minimal.nix ];
       };
     };
+
+    devShell.x86_64-linux = with nixpkgs.legacyPackages."x86_64-linux"; mkShell {
+      NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
+      nativeBuildInputs = [
+        git
+        home-manager.packages.x86_64-linux.default
+      ];
+    };
   };
 }
