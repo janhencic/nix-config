@@ -55,15 +55,11 @@
   #   "caps:escape" # map caps to escape.
   # };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     picom
     pinentry-curses
@@ -71,16 +67,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
   programs.mosh.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -91,11 +82,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -104,9 +90,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-  # services.openvpn.servers = {
-  # thai_to_slo_VPN = { config = '' config /home/janhencic/Downloads/at100.nordvpn.com.udp1194.ovpn ''; };
-  # };
   nix.settings = {
     substituters = [ "https://tvbeat-nixpkgs-cache.s3-eu-west-1.amazonaws.com/" ];
     trusted-public-keys = [ "hydra.tvbeat.com:4iHmKDd95QN9Po2FzqmfUD11Wk0/ln1oLlaLXDaIsNE=" ];
@@ -133,10 +116,6 @@
     XDG_CONFIG_HOME = "\${HOME}/.config";
     TERM="xterm-256color";
   };
-
-  # services.openvpn.servers = {
-  #   thaiVPN = { config = '' config /home/janhencic/Downloads/at111.nordvpn.com.udp1194.ovpn ''; }; 
-  # }; 
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 }
