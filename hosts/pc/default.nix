@@ -46,6 +46,16 @@
         start = ''exec $HOME/.xsession'';
       }
     ];
+
+    # Set my preferred monitor resolution and refresh rate.
+    # Taken from https://discourse.nixos.org/t/proper-way-to-configure-monitors
+    displayManager.setupCommands = ''
+      ${pkgs.xorg.xrandr}/bin/xrandr \
+        --output HDMI-0 \
+        --primary \
+        --mode 3840x2160 \
+        --rate 120
+    '';
   };  
 
   # Configure keymap in X11
