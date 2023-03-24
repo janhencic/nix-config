@@ -18,12 +18,12 @@ local function open_tab_index_keybind(index)
     function()
       vim.cmd('tabn ' .. index)
     end,
-    'Move to tab ' .. index
+    'Move to tab ' .. index,
   }
 end
 
 function M.keybinds()
-  for index=1,max_allowed_tabs do
+  for index = 1, max_allowed_tabs do
     keybinds_table[tostring(index)] = open_tab_index_keybind(index)
   end
 

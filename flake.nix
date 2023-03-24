@@ -36,6 +36,7 @@
       nativeBuildInputs = [
         git
         home-manager.packages.x86_64-linux.default
+        stylua
       ];
     };
   };

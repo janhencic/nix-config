@@ -4,5 +4,4 @@ require('indent_blankline').setup({
 
 require('neogit').setup({})
 
-require('fidget').setup{}
-
+require('fidget').setup({})

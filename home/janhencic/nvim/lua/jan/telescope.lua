@@ -12,7 +12,7 @@ M.setup = {
     live_grep = default_picker_config,
     lsp_definitions = default_picker_config,
     lsp_references = {
-      path_display = { "smart" }
+      path_display = { 'smart' },
     },
   },
 }
