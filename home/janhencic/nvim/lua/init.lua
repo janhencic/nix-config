@@ -149,6 +149,15 @@ wk.register({
     end,
     'List all available commands',
   },
+  r = {
+    name = 'run',
+    c = {
+      function()
+        vim.cmd('split term://cargo check')
+      end,
+      'cargo check',
+    },
+  },
   ['<tab>'] = jan_tab.keybinds(),
   ['<space>'] = {
     function()
