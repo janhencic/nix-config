@@ -60,4 +60,25 @@ function M.create_lsp_cursorhold_autocmd()
   )
 end
 
+M.rename = {
+  function()
+    vim.lsp.buf.rename()
+  end,
+  'rename all references to the symbol under the cursor',
+}
+
+M.hover = {
+  function()
+    vim.lsp.buf.hover()
+  end,
+  'display hover information about the symbol under the cursor',
+}
+
+M.declaration = {
+  function()
+    vim.lsp.buf.declaration()
+  end,
+  'jump to the declaration of the symbol under the cursor',
+}
+
 return M

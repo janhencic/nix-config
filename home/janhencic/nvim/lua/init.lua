@@ -6,6 +6,7 @@ require('jan.set')
 local jan_nvim_tree = require('jan.nvim_tree')
 local jan_telescope = require('jan.telescope')
 local jan_tab = require('jan.tab')
+local jan_lsp = require('jan.lsp')
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -89,25 +90,10 @@ wk.register({
   l = {
     name = 'lsp',
     d = jan_telescope.lsp_definitions,
-    D = {
-      function()
-        vim.lsp.buf.declaration()
-      end,
-      'go declaration',
-    },
+    D = jan_lsp.declaration,
     r = jan_telescope.lsp_references,
-    ['R'] = {
-      function()
-        vim.lsp.buf.rename()
-      end,
-      'rename variable or struct',
-    },
-    v = {
-      function()
-        vim.lsp.buf.hover()
-      end,
-      'show varible type under cursor',
-    },
+    R = jan_lsp.rename,
+    v = jan_lsp.hover,
   },
   g = {
     g = {
