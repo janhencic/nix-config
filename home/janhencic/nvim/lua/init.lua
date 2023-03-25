@@ -172,12 +172,6 @@ wk.register({
   [','] = jan_nvim_tree.close,
 }, { prefix = '<leader>' })
 
-function MyWinEnter()
-  -- vim.api.nvim_set_option('winhighlight', 'NormalNC:InactiveWindow')
-end
-
-MyWinEnter()
-
 vim.api.nvim_set_option('termguicolors', true)
 vim.cmd('colorscheme tokyonight-moon')
 require('tokyonight').setup({
@@ -189,8 +183,6 @@ vim.api.nvim_set_hl(0, 'InactiveWindow', { bg = '#080707' })
 
 vim.g.netrw_keepdir = false
 
-local myWinEnterGroup = vim.api.nvim_create_augroup('MyWinEnterGroup', { clear = true })
-vim.api.nvim_create_autocmd({ 'WinEnter' }, { pattern = '*', callback = MyWinEnter, group = myWinEnterGroup })
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
 vim.o.number = true
