@@ -5,3 +5,5 @@ require('indent_blankline').setup({
 require('neogit').setup({})
 
 require('fidget').setup({})
+
+require('lualine').setup({})

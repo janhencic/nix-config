@@ -38,6 +38,7 @@ pkgs.neovim.override {
         tokyonight-nvim
         fidget-nvim
         diffview-nvim
+        lualine-nvim
 
         # The contents of ~/.config/nvim is packaged as a nvim plugin.
         myConfig
