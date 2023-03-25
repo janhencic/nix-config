@@ -172,21 +172,12 @@ wk.register({
   [','] = jan_nvim_tree.close,
 }, { prefix = '<leader>' })
 
-vim.api.nvim_set_option('termguicolors', true)
 vim.cmd('colorscheme tokyonight-moon')
 require('tokyonight').setup({
   styles = {
     variables = { 'transparent' },
   },
 })
-vim.api.nvim_set_hl(0, 'InactiveWindow', { bg = '#080707' })
-
-vim.g.netrw_keepdir = false
-
-vim.o.expandtab = true
-vim.o.shiftwidth = 4
-vim.o.number = true
-vim.o.autochdir = true
 
 local file_type = vim.api.nvim_create_augroup('my_file_type_group', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
@@ -216,13 +207,3 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
   group = file_type,
 })
-
-vim.g.netrw_banner = false
-
-vim.o.updatetime = 300
-
--- Folding with the use of treesitter
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
--- Start with all folds open
-vim.o.foldlevelstart = 99
