@@ -64,6 +64,13 @@ M.open_current_dir = {
   'Open nvim-tree in current working directory',
 }
 
+M.open = {
+  function()
+    api.tree.open()
+  end,
+  'Open nvim-tree',
+}
+
 M.close = {
   function()
     api.tree.close()

@@ -165,10 +165,8 @@ wk.register({
     end,
     'Fuzzy search through the output of git ls-files command, respects .gitignore',
   },
-  ['.'] = {
-    jan_nvim_tree.open_current_dir,
-    'Open nvim-tree in current folder',
-  },
+  ['.'] = jan_nvim_tree.open_current_dir,
+  ['>'] = jan_nvim_tree.open,
   [','] = jan_nvim_tree.close,
 }, { prefix = '<leader>' })
 
