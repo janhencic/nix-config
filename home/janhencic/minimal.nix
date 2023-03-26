@@ -7,6 +7,7 @@ in
     ./bash.nix
     ./fzf.nix
     ./git.nix
+    ./tmux
   ];
 
   nixpkgs = {

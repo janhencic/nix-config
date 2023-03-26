@@ -9,6 +9,7 @@ in
     ./fzf.nix
     ./git.nix
     ./i3
+    ./tmux
   ];
 
   nixpkgs = {
