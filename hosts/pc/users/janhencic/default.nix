@@ -8,7 +8,6 @@
       "networkmanager"
     ];
     packages = with pkgs; [
-      firefox
       home-manager
     ];
 
