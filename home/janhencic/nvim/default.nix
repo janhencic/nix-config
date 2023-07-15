@@ -39,6 +39,7 @@ pkgs.neovim.override {
         fidget-nvim
         diffview-nvim
         lualine-nvim
+        nvim-treesitter-context
 
         # The contents of ~/.config/nvim is packaged as a nvim plugin.
         myConfig
