@@ -14,7 +14,7 @@ vim.o.foldmethod = 'expr'
 vim.o.foldmethod = 'expr'
 vim.o.number = true
 vim.o.relativenumber = true
--- My default shift width 
+-- My default shift width
 vim.o.shiftwidth = 4
 -- If this is not set the column will pop in and out whenever lsp is displaying a warning
 -- see https://github.com/neovim/nvim-lspconfig/issues/195 for more information.
