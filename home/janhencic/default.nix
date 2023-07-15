@@ -25,6 +25,7 @@ in
     username = "janhencic";
     homeDirectory = "/home/janhencic";
     stateVersion = "22.11";
+    sessionVariables = { EDITOR = "nvim"; };
 
     packages = with pkgs; [
       alacritty
