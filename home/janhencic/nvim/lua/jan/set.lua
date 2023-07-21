@@ -1,4 +1,5 @@
 vim.api.nvim_set_hl(0, 'InactiveWindow', { bg = '#080707' })
+vim.g.mapleader = ' '
 -- Stay in visual mode after indenting either left or right
 vim.cmd('vnoremap < <gv')
 vim.cmd('vnoremap > >gv')
