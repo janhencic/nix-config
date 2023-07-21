@@ -37,4 +37,18 @@ M.lsp_references = {
   'Show lsp variable refferences with telescope',
 }
 
+local function live_grep_git_repo()
+  local cwd = vim.loop.cwd()
+  local cmd = { "git", "rev-parse", "--show-toplevel", '-C', cwd }
+
+  local output = vim.fn.systemlist(cmd)
+
+  telescope_builtin.live_grep({ cwd = output[1] })
+end
+
+M.live_grep_git_repo = {
+  live_grep_git_repo,
+  'Live grep git repository'
+}
+
 return M

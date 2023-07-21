@@ -128,6 +128,7 @@ wk.register({
       end,
       'Search for a string in your current working directory and get results live as you type, respects .gitignore',
     },
+    p = jan_telescope.live_grep_git_repo,
   },
   c = {
     function()
