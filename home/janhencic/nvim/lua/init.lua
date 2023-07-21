@@ -7,9 +7,6 @@ local jan_telescope = require('jan.telescope')
 local jan_tab = require('jan.tab')
 local jan_lsp = require('jan.lsp')
 
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 wk.register({
   f = {
     name = 'file',
