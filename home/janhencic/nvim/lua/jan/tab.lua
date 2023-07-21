@@ -30,4 +30,53 @@ function M.keybinds()
   return keybinds_table
 end
 
+M.horizontal_split = {
+  function()
+    vim.cmd('split')
+  end,
+  'horizontal split',
+}
+
+M.vertical_split = {
+  function()
+    vim.cmd('vsplit')
+  end,
+  'vertical split',
+}
+
+M.close_split = {
+  function()
+    vim.cmd('q')
+  end,
+  'close current splt',
+}
+
+M.move_right = {
+  function()
+    vim.cmd('wincmd l')
+  end,
+  'Move to right split',
+}
+
+M.move_left = {
+  function()
+    vim.cmd('wincmd h')
+  end,
+  'Move to left split',
+}
+
+M.move_down = {
+  function()
+    vim.cmd('wincmd j')
+  end,
+  'Move to bottom split',
+}
+
+M.move_up = {
+  function()
+    vim.cmd('wincmd k')
+  end,
+  'Move to top split',
+}
+
 return M

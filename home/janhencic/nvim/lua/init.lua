@@ -19,48 +19,13 @@ wk.register({
   },
   w = {
     name = 'window',
-    s = {
-      function()
-        vim.cmd('split')
-      end,
-      'horizontal split',
-    },
-    v = {
-      function()
-        vim.cmd('vsplit')
-      end,
-      'vertical split',
-    },
-    d = {
-      function()
-        vim.cmd('q')
-      end,
-      'close current splt',
-    },
-    l = {
-      function()
-        vim.cmd('wincmd l')
-      end,
-      'Move to right split',
-    },
-    h = {
-      function()
-        vim.cmd('wincmd h')
-      end,
-      'Move to left split',
-    },
-    j = {
-      function()
-        vim.cmd('wincmd j')
-      end,
-      'Move to bottom split',
-    },
-    k = {
-      function()
-        vim.cmd('wincmd k')
-      end,
-      'Move to top split',
-    },
+    s = jan_tab.horizontal_split,
+    v = jan_tab.vertical_split,
+    d = jan_tab.close_split,
+    l = jan_tab.move_right,
+    h = jan_tab.move_left,
+    j = jan_tab.move_down,
+    k = jan_tab.move_up,
   },
   t = {
     name = 'terminal',
