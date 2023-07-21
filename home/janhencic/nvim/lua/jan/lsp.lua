@@ -48,6 +48,8 @@ M.setup_rust = {
 -- See https://github.com/NixOS/nixpkgs/issues/210051 for more details
 M.setup_ts = {}
 
+M.bashls = {}
+
 function M.create_lsp_cursorhold_autocmd()
   local lsp_document_highlight = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
   vim.api.nvim_create_autocmd(
