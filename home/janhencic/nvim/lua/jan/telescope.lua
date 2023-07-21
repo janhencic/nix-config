@@ -51,4 +51,39 @@ M.live_grep_git_repo = {
   'Live grep git repository'
 }
 
+M.live_grep = {
+  function()
+    telescope_builtin.live_grep()
+  end,
+  'Live grep cwd',
+}
+
+M.find_files = {
+  function()
+    telescope_builtin.find_files()
+  end,
+  'Find file in cwd',
+}
+
+M.commands = {
+  function()
+    telescope_builtin.commands()
+  end,
+  'List all available commands',
+}
+
+M.oldfiles = {
+  function()
+    telescope_builtin.oldfiles()
+  end,
+  'Open recently opened files',
+}
+
+M.git_files = {
+  function()
+    telescope_builtin.git_files()
+  end,
+  'Fuzzy find git files',
+}
+
 return M

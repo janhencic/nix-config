@@ -1,7 +1,6 @@
 vim.g.mapleader = ' '
 local wk = require('which-key')
 local neogit = require('neogit')
-local telescope_builtin = require('telescope.builtin')
 require('jan.set')
 local jan_nvim_tree = require('jan.nvim_tree')
 local jan_telescope = require('jan.telescope')
@@ -20,18 +19,7 @@ wk.register({
       end,
       'ToggleNvimTree',
     },
-    r = {
-      function()
-        telescope_builtin.oldfiles()
-      end,
-      'Open recently opned files',
-    },
-    f = {
-      function()
-        telescope_builtin.commands()
-      end,
-      'List all available commands',
-    },
+    r = jan_telescope.oldfiles,
   },
   w = {
     name = 'window',
@@ -116,26 +104,11 @@ wk.register({
     'Toggle Undo tree',
   },
   s = {
-    d = {
-      function()
-        telescope_builtin.live_grep()
-      end,
-      'Search for a string in your current working directory and get results live as you type, respects .gitignore',
-    },
-    f = {
-      function()
-        telescope_builtin.find_files()
-      end,
-      'Search for a string in your current working directory and get results live as you type, respects .gitignore',
-    },
+    d = jan_telescope.live_grep,
+    f = jan_telescope.find_files,
     p = jan_telescope.live_grep_git_repo,
   },
-  c = {
-    function()
-      telescope_builtin.commands()
-    end,
-    'List all available commands',
-  },
+  c = jan_telescope.commands,
   r = {
     name = 'run',
     c = {
@@ -146,12 +119,7 @@ wk.register({
     },
   },
   ['<tab>'] = jan_tab.keybinds(),
-  ['<space>'] = {
-    function()
-      telescope_builtin.git_files()
-    end,
-    'Fuzzy search through the output of git ls-files command, respects .gitignore',
-  },
+  ['<space>'] = jan_telescope.git_files,
   ['.'] = jan_nvim_tree.open_current_dir,
   ['>'] = jan_nvim_tree.open,
   [','] = jan_nvim_tree.close,
