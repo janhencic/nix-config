@@ -32,6 +32,8 @@ local function dash_keymap()
 end
 
 function M.on_attach(bufnr)
+  api.config.mappings.default_on_attach(bufnr)
+
   vim.keymap.set('n', '<CR>', cr_keymap, {
     buffer = bufnr,
     noremap = true,
