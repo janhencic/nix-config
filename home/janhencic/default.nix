@@ -5,7 +5,7 @@ in
 {
   imports = [
     ./alacritty.nix
-    ./bash.nix
+    ./bash
     ./fzf.nix
     ./git.nix
     ./i3
