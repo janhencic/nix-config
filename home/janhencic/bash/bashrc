@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-tmux_attach_fzf() {
+fzf_tmux_session() {
     target_sesstion="$(tmux list-sessions | sed -E s/:.*$// | fzf --height 15%)"
 
     # Check if in Tmux session
@@ -13,6 +13,14 @@ tmux_attach_fzf() {
     fi
 }
 
+fzf_git_branch() {
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        git branch | sed -r 's/[* ]+//' | fzf --height=40% | xargs -I{} git checkout {}
+    else
+        echo "not a git repo, cannot select branch"
+    fi
+}
+
 # Disable the terminal flow control feature.
 # This allows me to rebind Control+s and Control+q.
 stty -ixon
@@ -20,4 +28,8 @@ stty -ixon
 # Select a tmux session by using an fzf picker.
 # The key combination Control + s was chosen, since it roughly corresponds
 # the the default Tmux session picker keybind (Control + b followed by s)
-bind '"\C-s":"tmux_attach_fzf\n"'
+bind '"\C-s":"fzf_tmux_session\n"'
+
+# Select a tmux session by using an fzf picker.
+# The keybind Control + q is arbitrary (may be switched in the future).
+bind '"\C-q":"fzf_git_branch\n"'
