@@ -50,6 +50,8 @@ M.setup_ts = {}
 
 M.bashls = {}
 
+M.pyright = {}
+
 function M.create_lsp_cursorhold_autocmd()
   local lsp_document_highlight = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
   vim.api.nvim_create_autocmd(
