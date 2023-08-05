@@ -85,4 +85,11 @@ M.declaration = {
   'jump to the declaration of the symbol under the cursor',
 }
 
+M.action = {
+  function()
+    vim.lsp.buf.code_action()
+  end,
+  'run lsp code_action'
+}
+
 return M

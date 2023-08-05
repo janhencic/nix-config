@@ -32,6 +32,7 @@ wk.register({
     r = jan_telescope.lsp_references,
     R = jan_lsp.rename,
     v = jan_lsp.hover,
+    a = jan_lsp.action,
   },
   g = {
     g = jan.open_neogit,
