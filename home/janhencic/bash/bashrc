@@ -33,3 +33,25 @@ bind '"\C-s":"fzf_tmux_session\n"'
 # Select a tmux session by using an fzf picker.
 # The keybind Control + q is arbitrary (may be switched in the future).
 bind '"\C-q":"fzf_git_branch\n"'
+
+# Instead of using 'cd ../../../../',
+# you can easily achieve the same by running 'up 4'.
+up () {
+    local dir=""
+    local limit="${1}"
+
+    # Default to limit of 1
+    if [ -z "$limit" ] || [ "$limit" -le 0 ]; then
+        limit=1
+    fi
+
+    for ((i=1;i<=limit;i++)); do
+        dir="../$dir"
+    done
+
+    # perform cd. Show error if cd fails
+    if ! cd "$d"; then
+        echo "Couldn't go up $limit dirs.";
+    fi
+}
+
