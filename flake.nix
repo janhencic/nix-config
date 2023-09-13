@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nil.url = github:oxalica/nil;
   };
 
-  outputs = { self, nixpkgs, home-manager }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nil }@inputs: {
     nixosConfigurations = {
       pc = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -42,6 +43,7 @@
         git
         home-manager.packages.x86_64-linux.default
         stylua
+        nil.packages.x86_64-linux.default
       ];
     };
   };
