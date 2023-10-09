@@ -1,11 +1,11 @@
-{ lib, config, pkgs, inputs, ... }:
+{ pkgs, inputs, pkgs-unstable, ... }:
 
 {
   imports =
     [
       inputs.home-manager.nixosModules.home-manager
       ./hardware-configuration.nix
-      ./users/janhencic
+      (import ./users/janhencic { inherit pkgs inputs pkgs-unstable; })
 
       ../common.nix
     ];

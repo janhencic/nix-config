@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, config, pkgs-unstable, ... }:
 {
   users.users.janhencic = {
     isNormalUser = true;

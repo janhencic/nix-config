@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 let
   jan_nvim = import ./nvim/default.nix { inherit pkgs; };
 in
