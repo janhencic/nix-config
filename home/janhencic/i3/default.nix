@@ -2,7 +2,7 @@
 {
   xsession = {
     enable = true;
-  
+
     windowManager.i3 = {
       enable = true;
       config = null;
@@ -10,7 +10,7 @@
       package = pkgs.i3-gaps;
     };
   };
-  
+
   home.packages = with pkgs; [
     dmenu
     polybar

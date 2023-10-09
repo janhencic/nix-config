@@ -36,11 +36,11 @@ in
       selene
       lazygit
       gcc
-      ripgrep 
+      ripgrep
       deluge
       pavucontrol
-      google-chrome
-      slack
+      pkgs-unstable.slack
+      pkgs-unstable.google-chrome
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim

@@ -49,7 +49,7 @@
         };
       };
       cursor = {
-        underline = {};
+        underline = { };
       };
     };
   };

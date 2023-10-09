@@ -1,5 +1,5 @@
 { config, pkgs, ... }:
-let 
+let
   jan_nvim = import ./nvim/default.nix { inherit pkgs; };
 in
 {
@@ -32,7 +32,7 @@ in
       selene
       lazygit
       gcc
-      ripgrep 
+      ripgrep
       deluge
       pavucontrol
 

@@ -58,7 +58,7 @@
 
   environment.sessionVariables = rec {
     XDG_CONFIG_HOME = "\${HOME}/.config";
-    TERM="xterm-256color";
+    TERM = "xterm-256color";
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -70,7 +70,7 @@
     desktopManager = {
       xterm.enable = false;
     };
-   
+
     libinput.enable = true;
     displayManager.lightdm.enable = true;
     displayManager.session = [

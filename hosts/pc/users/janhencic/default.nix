@@ -3,7 +3,7 @@
   users.users.janhencic = {
     isNormalUser = true;
     initialPassword = "123";
-    extraGroups = [ 
+    extraGroups = [
       "wheel"
       "networkmanager"
     ];
@@ -13,5 +13,5 @@
 
   };
 
-  home-manager.users.janhencic = import ./home;
+  home-manager.users.janhencic = (import ./home { inherit pkgs inputs config pkgs-unstable; });
 }
