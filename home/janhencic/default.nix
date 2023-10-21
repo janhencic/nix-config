@@ -41,6 +41,7 @@ in
       pavucontrol
       pkgs-unstable.slack
       pkgs-unstable.google-chrome
+      postman
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim
