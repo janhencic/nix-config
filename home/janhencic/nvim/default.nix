@@ -9,7 +9,7 @@ in
 pkgs.neovim.override {
   configure = {
     customRC = ''
-      lua require("init")
+      lua require("init").run()
     '';
     packages.plugins = with pkgs.vimPlugins; {
       start = [
