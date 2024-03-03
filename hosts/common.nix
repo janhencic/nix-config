@@ -61,7 +61,8 @@
     TERM = "xterm-256color";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # https://github.com/NixOS/nixpkgs/issues/221035
+  boot.kernelPackages = pkgs.linuxPackages_6_1;
 
   hardware.bluetooth.enable = true;
 
