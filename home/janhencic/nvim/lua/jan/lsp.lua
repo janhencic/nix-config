@@ -54,6 +54,13 @@ M.pyright = {}
 
 M.nil_ls = {}
 
+M.intelephense = {}
+
+M.ccls = {
+  filetypes = { 'c', 'h', 'cpp', 'objc', 'objcpp', 'cuda' },
+  compilationDatabaseDirectory = 'build',
+}
+
 function M.create_lsp_cursorhold_autocmd()
   local lsp_document_highlight = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
   vim.api.nvim_create_autocmd(
