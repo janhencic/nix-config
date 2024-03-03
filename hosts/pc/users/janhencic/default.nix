@@ -6,6 +6,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "docker"
     ];
     packages = with pkgs; [
       home-manager
