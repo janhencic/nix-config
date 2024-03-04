@@ -35,6 +35,7 @@ in
       ripgrep
       deluge
       pavucontrol
+      awscli
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim

@@ -42,6 +42,7 @@ in
       pkgs-unstable.slack
       pkgs-unstable.google-chrome
       postman
+      awscli
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim
