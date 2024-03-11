@@ -23,17 +23,18 @@
         inherit system;
         config.allowUnfree = true;
       };
+      nil = inputs.nil.packages.${system}.default;
     in
     {
       nixosConfigurations = {
         pc = nixpkgs.lib.nixosSystem {
           system = "${system}";
-          specialArgs = { inherit inputs pkgs-unstable; };
+          specialArgs = { inherit inputs pkgs-unstable nil; };
           modules = [ ./hosts/pc ];
         };
         laptop = nixpkgs.lib.nixosSystem {
           system = "${system}";
-          specialArgs = { inherit inputs pkgs-unstable; };
+          specialArgs = { inherit inputs pkgs-unstable nil; };
           modules = [ ./hosts/laptop ];
         };
       };
@@ -41,12 +42,12 @@
       homeConfigurations = {
         "janhencic@pc" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs pkgs-unstable; };
+          extraSpecialArgs = { inherit inputs pkgs-unstable nil; };
           modules = [ ./home/janhencic ];
         };
         "janhencic@tvb" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs pkgs-unstable; };
+          extraSpecialArgs = { inherit inputs pkgs-unstable nil; };
           modules = [ ./home/janhencic/minimal.nix ];
         };
       };
@@ -57,7 +58,7 @@
           git
           home-manager.packages.${system}.default
           stylua
-          nil.packages.${system}.default
+          nil
           pkgs.nixpkgs-fmt
         ];
       };

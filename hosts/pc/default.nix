@@ -1,4 +1,4 @@
-{ pkgs, inputs, pkgs-unstable, config, ... }:
+{ pkgs, inputs, pkgs-unstable, config, nil, ... }:
 
 {
   imports =
@@ -6,7 +6,7 @@
       inputs.home-manager.nixosModules.home-manager
       ./hardware-configuration.nix
       ../common.nix
-      (import ./users/janhencic { inherit pkgs config inputs pkgs-unstable; })
+      (import ./users/janhencic { inherit pkgs config inputs pkgs-unstable nil; })
     ];
 
   networking.hostName = "pc";

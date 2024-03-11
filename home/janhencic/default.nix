@@ -1,6 +1,7 @@
-{ config, pkgs, inputs, pkgs-unstable, ... }:
+{ config, pkgs, inputs, pkgs-unstable, nil, ... }:
 let
   jan_nvim = import ./nvim/default.nix { pkgs = pkgs-unstable; };
+  drata = (import ./../../drata.nix { pkgs = pkgs-unstable; stdenv = pkgs-unstable.stdenv; });
 in
 {
   imports = [
@@ -43,6 +44,8 @@ in
       pkgs-unstable.google-chrome
       postman
       awscli
+      nil
+      drata
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim

@@ -1,6 +1,7 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, nil, ... }:
 let
   jan_nvim = import ./nvim/default.nix { pkgs = pkgs-unstable; };
+  drata = (import ./../../drata.nix { pkgs = pkgs; stdenv = pkgs.stdenv; });
 in
 {
   imports = [
@@ -36,6 +37,7 @@ in
       deluge
       pavucontrol
       awscli
+      nil
 
       (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
       jan_nvim
@@ -44,6 +46,7 @@ in
       shellcheck
       jq
       htop
+      drata
     ];
   };
 }
