@@ -1,4 +1,4 @@
-{ pkgs, inputs, config, pkgs-unstable, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
   users.users.janhencic = {
     isNormalUser = true;
     initialPassword = "123";
@@ -8,5 +8,5 @@
   };
 
   home-manager.users.janhencic =
-    (import ./home { inherit pkgs inputs config pkgs-unstable; });
+    (import ./home { inherit pkgs pkgs-unstable; });
 }

@@ -28,12 +28,12 @@
       nixosConfigurations = {
         pc = nixpkgs.lib.nixosSystem {
           system = "${system}";
-          specialArgs = { inherit inputs pkgs-unstable nil; };
+          specialArgs = { inherit inputs pkgs-unstable; };
           modules = [ ./hosts/pc ];
         };
         laptop = nixpkgs.lib.nixosSystem {
           system = "${system}";
-          specialArgs = { inherit inputs pkgs-unstable nil; };
+          specialArgs = { inherit inputs pkgs-unstable; };
           modules = [ ./hosts/laptop ];
         };
       };
@@ -41,12 +41,12 @@
       homeConfigurations = {
         "janhencic@pc" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs pkgs-unstable nil; };
+          extraSpecialArgs = { inherit inputs pkgs-unstable; };
           modules = [ ./home/janhencic ];
         };
         "janhencic@tvb" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit inputs pkgs-unstable nil; };
+          extraSpecialArgs = { inherit inputs pkgs-unstable; };
           modules = [ ./home/janhencic/minimal.nix ];
         };
       };
