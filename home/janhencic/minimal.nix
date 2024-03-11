@@ -1,7 +1,6 @@
 { config, pkgs, pkgs-unstable, nil, ... }:
 let
-  jan_nvim = import ./nvim/default.nix { pkgs = pkgs-unstable; };
-  drata = (import ./../../drata.nix { pkgs = pkgs; stdenv = pkgs.stdenv; });
+  shell_tools = import ./shell_tools.nix { inherit pkgs pkgs-unstable; };
 in
 {
   imports = [
@@ -26,27 +25,6 @@ in
     stateVersion = "22.11";
     sessionVariables = { EDITOR = "nvim"; };
 
-    packages = with pkgs; [
-      pass
-      git
-      sumneko-lua-language-server
-      selene
-      lazygit
-      gcc
-      ripgrep
-      deluge
-      pavucontrol
-      awscli
-      nil
-
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
-      jan_nvim
-      tree
-      tmux
-      shellcheck
-      jq
-      htop
-      drata
-    ];
+    packages = shell_tools;
   };
 }
