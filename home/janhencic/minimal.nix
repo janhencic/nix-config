@@ -5,8 +5,8 @@ in
 {
   imports = [
     ./bash
-    ./fzf.nix
-    ./git.nix
+    ./fzf
+    ./git
     ./tmux
   ];
 

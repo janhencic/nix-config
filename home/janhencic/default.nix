@@ -5,10 +5,10 @@ let
 in
 {
   imports = [
-    ./alacritty.nix
+    ./alacritty
     ./bash
-    ./fzf.nix
-    ./git.nix
+    ./fzf
+    ./git
     ./i3
     ./tmux
   ];
