@@ -1,9 +1,5 @@
-{ config, pkgs, inputs, pkgs-unstable, nil, ... }:
+{ pkgs, pkgs-unstable, nil, ... }:
 let
-  shell_tools = import ./shell_tools.nix { inherit pkgs pkgs-unstable; };
-  destkop_apps = import ./desktop_apps.nix { inherit pkgs pkgs-unstable; };
-in
-{
   imports = [
     ./alacritty
     ./bash
@@ -12,22 +8,6 @@ in
     ./i3
     ./tmux
   ];
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
-  };
-
-  fonts.fontconfig.enable = true;
-
-  home = {
-    username = "janhencic";
-    homeDirectory = "/home/janhencic";
-    stateVersion = "22.11";
-    sessionVariables = { EDITOR = "nvim"; };
-
-    packages = shell_tools ++ destkop_apps;
-  };
-}
+  packages = (import ./shell_tools.nix { inherit pkgs pkgs-unstable; }) ++ (import ./desktop_apps.nix { inherit pkgs pkgs-unstable; });
+in
+  import ./my_home_config.nix { inherit imports packages; }
