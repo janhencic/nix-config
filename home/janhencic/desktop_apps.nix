@@ -1,7 +1,7 @@
 { pkgs, pkgs-unstable }:
 
 let
-  drata = (import ./../../drata.nix { pkgs = pkgs-unstable; stdenv = pkgs-unstable.stdenv; });
+  drata = (import ./drata { pkgs = pkgs-unstable; stdenv = pkgs-unstable.stdenv; });
 in
   with pkgs; [
     chromium
