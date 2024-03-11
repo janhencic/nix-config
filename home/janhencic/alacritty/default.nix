@@ -15,12 +15,8 @@
           family = "FiraCode Nerd Font Mono";
           style = "Regular";
         };
-        bold = {
-          family = "FiraCode Nerd Font Mono";
-        };
-        italic = {
-          family = "FiraCode Nerd Font Mono";
-        };
+        bold = { family = "FiraCode Nerd Font Mono"; };
+        italic = { family = "FiraCode Nerd Font Mono"; };
       };
       colors = {
         primary = {
@@ -48,9 +44,7 @@
           white = "#FCFCFA";
         };
       };
-      cursor = {
-        underline = { };
-      };
+      cursor = { underline = { }; };
     };
   };
 }

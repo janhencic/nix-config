@@ -1,10 +1,8 @@
 { pkgs, pkgs-unstable }:
 
-let
-  jan_nvim = import ./nvim/default.nix { pkgs = pkgs-unstable; };
-in
+let jan_nvim = import ./nvim/default.nix { pkgs = pkgs-unstable; };
 
-with pkgs; [
+in with pkgs; [
   alacritty
   pass
   git
@@ -21,4 +19,5 @@ with pkgs; [
   shellcheck
   jq
   htop
+  nixfmt
 ]

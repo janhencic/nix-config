@@ -1,5 +1,4 @@
-{ imports, packages }:
-{
+{ imports, packages }: {
   imports = imports;
 
   nixpkgs = {

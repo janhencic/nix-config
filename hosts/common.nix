@@ -18,10 +18,7 @@
   hardware.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [
-    picom
-    pinentry-curses
-  ];
+  environment.systemPackages = with pkgs; [ picom pinentry-curses ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -35,8 +32,10 @@
   services.openssh.enable = true;
 
   nix.settings = {
-    substituters = [ "https://tvbeat-nixpkgs-cache.s3-eu-west-1.amazonaws.com/" ];
-    trusted-public-keys = [ "hydra.tvbeat.com:4iHmKDd95QN9Po2FzqmfUD11Wk0/ln1oLlaLXDaIsNE=" ];
+    substituters =
+      [ "https://tvbeat-nixpkgs-cache.s3-eu-west-1.amazonaws.com/" ];
+    trusted-public-keys =
+      [ "hydra.tvbeat.com:4iHmKDd95QN9Po2FzqmfUD11Wk0/ln1oLlaLXDaIsNE=" ];
     experimental-features = [ "nix-command" "flakes" ];
   };
 
@@ -68,19 +67,15 @@
 
   services.xserver = {
     enable = true;
-    desktopManager = {
-      xterm.enable = false;
-    };
+    desktopManager = { xterm.enable = false; };
 
     libinput.enable = true;
     displayManager.lightdm.enable = true;
-    displayManager.session = [
-      {
-        manage = "desktop";
-        name = "xsession";
-        start = ''exec $HOME/.xsession'';
-      }
-    ];
+    displayManager.session = [{
+      manage = "desktop";
+      name = "xsession";
+      start = "exec $HOME/.xsession";
+    }];
   };
 
   virtualisation.docker.enable = true;

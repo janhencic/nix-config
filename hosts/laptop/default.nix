@@ -1,14 +1,13 @@
 { pkgs, inputs, pkgs-unstable, nil, ... }:
 
 {
-  imports =
-    [
-      inputs.home-manager.nixosModules.home-manager
-      ./hardware-configuration.nix
-      (import ./users/janhencic { inherit pkgs inputs pkgs-unstable nil; })
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    ./hardware-configuration.nix
+    (import ./users/janhencic { inherit pkgs inputs pkgs-unstable nil; })
 
-      ../common.nix
-    ];
+    ../common.nix
+  ];
 
   networking.hostName = "laptop";
 

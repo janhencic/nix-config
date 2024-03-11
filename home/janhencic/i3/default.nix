@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   xsession = {
     enable = true;
 
@@ -11,10 +10,5 @@
     };
   };
 
-  home.packages = with pkgs; [
-    dmenu
-    polybar
-    i3status
-    i3lock
-  ];
+  home.packages = with pkgs; [ dmenu polybar i3status i3lock ];
 }

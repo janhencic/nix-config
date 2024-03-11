@@ -24,8 +24,7 @@
         config.allowUnfree = true;
       };
       nil = inputs.nil.packages.${system}.default;
-    in
-    {
+    in {
       nixosConfigurations = {
         pc = nixpkgs.lib.nixosSystem {
           system = "${system}";
@@ -52,15 +51,17 @@
         };
       };
 
-      devShell.${system} = with pkgs; mkShell {
-        NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
-        nativeBuildInputs = [
-          git
-          home-manager.packages.${system}.default
-          stylua
-          nil
-          pkgs.nixpkgs-fmt
-        ];
-      };
+      devShell.${system} = with pkgs;
+        mkShell {
+          NIX_CONFIG =
+            "extra-experimental-features = nix-command flakes repl-flake";
+          nativeBuildInputs = [
+            git
+            home-manager.packages.${system}.default
+            stylua
+            nil
+            pkgs.nixpkgs-fmt
+          ];
+        };
     };
 }

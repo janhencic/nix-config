@@ -1,6 +1,5 @@
 { pkgs, stdenv }:
 
-
 stdenv.mkDerivation rec {
   pname = "drata-agent";
   version = "3.4.1";
@@ -44,26 +43,26 @@ stdenv.mkDerivation rec {
     glib
   ];
 
-  runtimeDependenciesPath = with pkgs; lib.makeLibraryPath [
-    stdenv.cc.cc
-    libglvnd
-    openssl
-    udev
-    alsa-lib
-    libpulseaudio
-    # libva
-    ffmpeg
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXrandr
-    gsettings-desktop-schemas
-    libglibutil
-    glib
-  ];
+  runtimeDependenciesPath = with pkgs;
+    lib.makeLibraryPath [
+      stdenv.cc.cc
+      libglvnd
+      openssl
+      udev
+      alsa-lib
+      libpulseaudio
+      # libva
+      ffmpeg
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXi
+      xorg.libXrandr
+      gsettings-desktop-schemas
+      libglibutil
+      glib
+    ];
 
-  postPatch = ''
-  '';
+  postPatch = "";
 
   installPhase = ''
     runHook preInstall

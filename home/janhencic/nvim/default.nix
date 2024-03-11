@@ -5,8 +5,7 @@ let
     name = "jan_config";
     src = ./.;
   };
-in
-pkgs.neovim.override {
+in pkgs.neovim.override {
   configure = {
     customRC = ''
       lua require("init").run()
