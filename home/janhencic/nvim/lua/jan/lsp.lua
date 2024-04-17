@@ -61,15 +61,33 @@ M.ccls = {
   compilationDatabaseDirectory = 'build',
 }
 
+M.terraform_lsp = {}
+
+-- Triggers `vim.lsp.buf.document_highlight` when the cursor is held stationary at a single location.
+-- This function is active for all files with an LSP server attached, assuming the feature is supported.
+-- Files with LSP servers that do not support document highlighting are explicitly excluded.
+local function cursor_hold_callback()
+  if vim.o.filetype ~= "terraform" then
+    vim.lsp.buf.document_highlight()
+  end
+end
+
+-- Activates `vim.lsp.buf.clear_references` whenever the cursor is moved.
+local function cursor_moved_callback()
+  if vim.o.filetype ~= "terraform" then
+    vim.lsp.buf.clear_references()
+  end
+end
+
 function M.create_lsp_cursorhold_autocmd()
   local lsp_document_highlight = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
   vim.api.nvim_create_autocmd(
     { 'CursorHold' },
-    { pattern = '*', callback = vim.lsp.buf.document_highlight, group = lsp_document_highlight }
+    { pattern = '*', callback = cursor_hold_callback, group = lsp_document_highlight }
   )
   vim.api.nvim_create_autocmd(
     { 'CursorMoved' },
-    { pattern = '*', callback = vim.lsp.buf.clear_references, group = lsp_document_highlight }
+    { pattern = '*', callback = cursor_moved_callback, group = lsp_document_highlight }
   )
 end
 
