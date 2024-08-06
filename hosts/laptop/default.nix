@@ -11,20 +11,6 @@
 
   networking.hostName = "laptop";
 
-  services.xserver = {
-    # Set my preferred monitor resolution and refresh rate.
-    # Taken from https://discourse.nixos.org/t/proper-way-to-configure-monitors
-    displayManager.setupCommands = ''
-      ${pkgs.xorg.xrandr}/bin/xrandr \
-        --output eDP-1-1 \
-        --primary \
-        --mode 1920x1080 \
-        --rate 60
-    '';
-
-    libinput.enable = true;
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

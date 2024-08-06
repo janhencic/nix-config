@@ -18,7 +18,16 @@
   hardware.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs; [ picom pinentry-curses ];
+  environment.systemPackages = with pkgs; [ 
+    picom 
+    pinentry-curses
+    # Needed for hyprland screen sharing
+    pipewire
+    wireplumber
+    xdg-desktop-portal-hyprland
+    grim
+    slurp
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -55,9 +64,10 @@
     intelBusId = "PCI:0:2:0";
   };
 
-  environment.sessionVariables = rec {
+  environment.sessionVariables = {
     XDG_CONFIG_HOME = "\${HOME}/.config";
     TERM = "xterm-256color";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   # https://github.com/NixOS/nixpkgs/issues/221035
@@ -70,13 +80,11 @@
     desktopManager = { xterm.enable = false; };
 
     libinput.enable = true;
-    displayManager.lightdm.enable = true;
-    displayManager.session = [{
-      manage = "desktop";
-      name = "xsession";
-      start = "exec $HOME/.xsession";
-    }];
+    displayManager.sddm.enable = true;
+    displayManager.sessionPackages = [ pkgs.hyprland ];
+    displayManager.defaultSession = "hyprland";
   };
+  programs.hyprland.enable = true;
 
   virtualisation.docker.enable = true;
 }
