@@ -20,4 +20,27 @@ in with pkgs; [
   jq
   htop
   nixfmt
+  pkg-config
+
+  just
+  pkgs-unstable.protobuf
+
+  pkgs-unstable.cargo
+  pkgs-unstable.rust-analyzer
+  pkgs-unstable.rustc
+  pkgs-unstable.rustfmt
+
+  # pkgs-unstable.rustup
+
+  pkgs-unstable.natscli
+
+  pkgs-unstable.skaffold
+  pkgs-unstable.kubernetes-helm
+  pkgs-unstable.minikube
+  pkgs-unstable.kubectl
+
+  pkgs-unstable.nodejs
+  pkgs-unstable.typescript
+
+  pkgs-unstable.postgresql_jit
 ]
