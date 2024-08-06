@@ -11,6 +11,6 @@ in with pkgs; [
   pavucontrol
   pkgs-unstable.slack
   pkgs-unstable.google-chrome
-  postman
   drata
+  pkgs-unstable.postman
 ]
