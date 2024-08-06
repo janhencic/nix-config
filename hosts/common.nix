@@ -1,11 +1,42 @@
-{ lib, config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
+let
+  ExecStart = pkgs.writeShellScriptBin "exec-start" ''
+    ${pkgs.iproute}/bin/ip tuntap add dev tap0 mode tap user ${config.users.users.janhencic.name}
+    ${pkgs.iproute}/bin/ip link set tap0 up
+    ${pkgs.iproute}/bin/ip link set tap0 master br0
+  '';
+in
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
 
-  networking.networkmanager.enable = true;
+  networking = {
+    # bridges.br0.interfaces = [ "eno1" ];
+    # Define the bridge
+    bridges.br0.interfaces = [ "eno1" ];
+    useNetworkd = true;  # Ensure networkd is used for managing networks
+    interfaces.eno1.useDHCP = false;  # Disable DHCP on the physical interface
+    interfaces.br0.useDHCP = true;  # Enable DHCP on the bridge interface
+    networkmanager.enable = true;
+  };
+
+  # Define a systemd service for the TAP interface
+  systemd.services.tap0 = {
+    description = "Configure TAP interface for QEMU";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${ExecStart}/bin/exec-start";
+      # ExecStop = "${ExecStop}/bin/exec-stop";
+      RemainAfterExit = true;
+      Restart = "on-failure";
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [ 2375 2376 ]; # Open port 5000 for the registry
 
   time.timeZone = "Europe/Ljubljana";
 
@@ -15,7 +46,7 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [ 
@@ -86,5 +117,25 @@
   };
   programs.hyprland.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
+
+  virtualisation.docker.daemon.settings = {
+    hosts = [ "tcp://0.0.0.0:2375" "tcp://0.0.0.0:2376" "unix:///var/run/docker.sock" ];
+    insecure-registries = [
+      "127.0.0.1:5000"
+    ];
+  };
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
+  }; 
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "janhencic" ];
 }
