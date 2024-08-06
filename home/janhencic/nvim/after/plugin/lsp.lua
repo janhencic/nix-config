@@ -9,5 +9,7 @@ require('lspconfig')['nil_ls'].setup(jan_lsp.nil_ls)
 require('lspconfig')['intelephense'].setup(jan_lsp.intelephense)
 require('lspconfig')['ccls'].setup(jan_lsp.ccls)
 require('lspconfig')['terraform_lsp'].setup(jan_lsp.terraform_lsp)
+require('lspconfig')['gopls'].setup(jan_lsp.terraform_lsp)
+require('lspconfig')['sqls'].setup(jan_lsp.sqls)
 
 jan_lsp.create_lsp_cursorhold_autocmd()

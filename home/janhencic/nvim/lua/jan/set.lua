@@ -23,3 +23,4 @@ vim.o.signcolumn = 'yes'
 vim.o.termguicolors = true
 vim.o.updatetime = 300
 vim.o.wrap = false
+vim.o.tabstop = 4

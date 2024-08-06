@@ -54,27 +54,44 @@ M.pyright = {}
 
 M.nil_ls = {}
 
+M.gopls = {}
+
+M.sqls = {}
+
+-- I'm going to use ccls instead
+-- M.clangd = {}
+
 M.intelephense = {}
 
 M.ccls = {
-  filetypes = { 'c', 'h', 'cpp', 'objc', 'objcpp', 'cuda' },
+  filetypes = { 'c', 'h', 'objc', 'objcpp', 'cuda', 'cpp' },
   compilationDatabaseDirectory = 'build',
 }
 
 M.terraform_lsp = {}
 
+local function is_in_list(value, list)
+  for _, v in ipairs(list) do
+    if v == value then
+      return true
+    end
+  end
+
+  return false
+end
+
 -- Triggers `vim.lsp.buf.document_highlight` when the cursor is held stationary at a single location.
 -- This function is active for all files with an LSP server attached, assuming the feature is supported.
 -- Files with LSP servers that do not support document highlighting are explicitly excluded.
 local function cursor_hold_callback()
-  if vim.o.filetype ~= "terraform" then
+  if not is_in_list(vim.o.filetype, { "terraform", "sql" }) then
     vim.lsp.buf.document_highlight()
   end
 end
 
 -- Activates `vim.lsp.buf.clear_references` whenever the cursor is moved.
 local function cursor_moved_callback()
-  if vim.o.filetype ~= "terraform" then
+  if not is_in_list(vim.o.filetype, { "terraform", "sql" }) then
     vim.lsp.buf.clear_references()
   end
 end

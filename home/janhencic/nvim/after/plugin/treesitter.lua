@@ -13,6 +13,9 @@ local parsers = {
   'rust',
   'typescript',
   'vimdoc',
+  'hyprlang',
+  'markdown',
+  'markdown_inline'
 }
 
 require('nvim-treesitter.configs').setup({
@@ -26,6 +29,7 @@ require('nvim-treesitter.configs').setup({
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
+
 
   highlight = {
     -- `false` will disable the whole extension
@@ -62,3 +66,8 @@ require('treesitter-context').setup({
   zindex = 20, -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 })
+
+vim.filetype.add({
+  pattern = { [".*/hyprland/.*%.conf"] = "hyprlang" },
+})
+
