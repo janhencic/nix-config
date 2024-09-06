@@ -19,7 +19,7 @@ in with pkgs; [
   shellcheck
   jq
   htop
-  nixfmt
+  nixfmt-classic
   pkg-config
 
   just
@@ -36,11 +36,15 @@ in with pkgs; [
 
   pkgs-unstable.skaffold
   pkgs-unstable.kubernetes-helm
-  pkgs-unstable.minikube
-  pkgs-unstable.kubectl
+  # pkgs-unstable.minikube
+  # pkgs-unstable.kubectl
 
   pkgs-unstable.nodejs
   pkgs-unstable.typescript
 
   pkgs-unstable.postgresql_jit
+
+  (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin])
+
+  pkgs-unstable.pgrok
 ]

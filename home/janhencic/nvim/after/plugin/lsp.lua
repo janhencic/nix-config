@@ -11,5 +11,6 @@ require('lspconfig')['ccls'].setup(jan_lsp.ccls)
 require('lspconfig')['terraform_lsp'].setup(jan_lsp.terraform_lsp)
 require('lspconfig')['gopls'].setup(jan_lsp.terraform_lsp)
 require('lspconfig')['sqls'].setup(jan_lsp.sqls)
+require('lspconfig')['omnisharp'].setup(jan_lsp.omnisharp)
 
 jan_lsp.create_lsp_cursorhold_autocmd()

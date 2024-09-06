@@ -44,7 +44,6 @@
           white = "#FCFCFA";
         };
       };
-      cursor = { underline = { }; };
     };
   };
 }

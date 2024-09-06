@@ -2,7 +2,7 @@
   users.users.janhencic = {
     isNormalUser = true;
     initialPassword = "123";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     packages = with pkgs; [ home-manager ];
 
   };

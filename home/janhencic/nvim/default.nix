@@ -43,14 +43,6 @@ in pkgs.neovim.override {
         render-markdown
         vim-table-mode
 
-        # rest-nvim
-        # Required by rest-nvim
-        # pkgs.luajitPackages.lua-curl
-        # pkgs.luajitPackages.xml2lua
-        # pkgs.luajitPackages.mimetypes
-        # nvim-nio
-
-
         # The contents of ~/.config/nvim is packaged as a nvim plugin.
         myConfig
       ];

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 let
   ExecStart = pkgs.writeShellScriptBin "exec-start" ''
@@ -13,28 +13,27 @@ in
   boot.loader.grub.device = "nodev";
 
   networking = {
-    # bridges.br0.interfaces = [ "eno1" ];
     # Define the bridge
-    bridges.br0.interfaces = [ "eno1" ];
-    useNetworkd = true;  # Ensure networkd is used for managing networks
-    interfaces.eno1.useDHCP = false;  # Disable DHCP on the physical interface
-    interfaces.br0.useDHCP = true;  # Enable DHCP on the bridge interface
+    # bridges.br0.interfaces = [ "eno1" ];
+    # useNetworkd = true;  # Ensure networkd is used for managing networks
+    # interfaces.eno1.useDHCP = false;  # Disable DHCP on the physical interface
+    # interfaces.br0.useDHCP = true;  # Enable DHCP on the bridge interface
     networkmanager.enable = true;
   };
 
-  # Define a systemd service for the TAP interface
-  systemd.services.tap0 = {
-    description = "Configure TAP interface for QEMU";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${ExecStart}/bin/exec-start";
-      # ExecStop = "${ExecStop}/bin/exec-stop";
-      RemainAfterExit = true;
-      Restart = "on-failure";
-    };
-  };
+  # # Define a systemd service for the TAP interface
+  # systemd.services.tap0 = {
+  #   description = "Configure TAP interface for QEMU";
+  #   after = [ "network.target" ];
+  #   wantedBy = [ "multi-user.target" ];
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = "${ExecStart}/bin/exec-start";
+  #     # ExecStop = "${ExecStop}/bin/exec-stop";
+  #     RemainAfterExit = true;
+  #     Restart = "on-failure";
+  #   };
+  # };
 
   networking.firewall.allowedTCPPorts = [ 2375 2376 ]; # Open port 5000 for the registry
 
@@ -53,11 +52,14 @@ in
     picom 
     pinentry-curses
     # Needed for hyprland screen sharing
-    pipewire
-    wireplumber
-    xdg-desktop-portal-hyprland
-    grim
-    slurp
+    pkgs-unstable.pipewire
+    pkgs-unstable.wireplumber
+    pkgs-unstable.xdg-desktop-portal-hyprland
+    # xdph
+    pkgs-unstable.libcamera
+    pkgs-unstable.xdg-desktop-portal
+    pkgs-unstable.grim
+    pkgs-unstable.slurp
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -72,10 +74,6 @@ in
   services.openssh.enable = true;
 
   nix.settings = {
-    substituters =
-      [ "https://tvbeat-nixpkgs-cache.s3-eu-west-1.amazonaws.com/" ];
-    trusted-public-keys =
-      [ "hydra.tvbeat.com:4iHmKDd95QN9Po2FzqmfUD11Wk0/ln1oLlaLXDaIsNE=" ];
     experimental-features = [ "nix-command" "flakes" ];
   };
 
@@ -99,10 +97,11 @@ in
     XDG_CONFIG_HOME = "\${HOME}/.config";
     TERM = "xterm-256color";
     WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   # https://github.com/NixOS/nixpkgs/issues/221035
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware.bluetooth.enable = true;
 
@@ -136,6 +135,8 @@ in
   pulse.enable = true;
   }; 
 
-  virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "janhencic" ];
+
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
 }

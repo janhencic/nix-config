@@ -58,6 +58,10 @@ M.gopls = {}
 
 M.sqls = {}
 
+M.omnisharp = {
+  cmd = { "OmniSharp" },
+}
+
 -- I'm going to use ccls instead
 -- M.clangd = {}
 
