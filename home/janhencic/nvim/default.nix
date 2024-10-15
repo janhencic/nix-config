@@ -40,7 +40,7 @@ in pkgs.neovim.override {
         lualine-nvim
         nvim-treesitter-context
         neoscroll-nvim
-        render-markdown
+        render-markdown-nvim
         vim-table-mode
 
         # The contents of ~/.config/nvim is packaged as a nvim plugin.

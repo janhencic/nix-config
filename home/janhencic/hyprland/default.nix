@@ -14,11 +14,12 @@ in
           # This is my Hyprland config, refer to the wiki for more information
           # https://wiki.hyprland.org/Configuring/Configuring-Hyprland/
 
-          source ${look_and_feel}
-          source ${keybindings}
-          source ${input}
-          source ${monitors}
-          source ${env_vars}
+          ${look_and_feel}
+
+          ${keybindings}
+          ${input}
+          ${monitors}
+          ${env_vars}
         '';
 
         package = pkgs.hyprland;

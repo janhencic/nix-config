@@ -19,6 +19,7 @@ in with pkgs; [
   shellcheck
   jq
   htop
+  # TODO: Consider switching to 'nixfmt-rfc-style'
   nixfmt-classic
   pkg-config
 

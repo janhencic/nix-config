@@ -1,12 +1,5 @@
 { config, pkgs, pkgs-unstable, ... }:
 
-let
-  ExecStart = pkgs.writeShellScriptBin "exec-start" ''
-    ${pkgs.iproute}/bin/ip tuntap add dev tap0 mode tap user ${config.users.users.janhencic.name}
-    ${pkgs.iproute}/bin/ip link set tap0 up
-    ${pkgs.iproute}/bin/ip link set tap0 master br0
-  '';
-in
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -77,11 +70,19 @@ in
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true;
 
   hardware.opengl.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    version = "555.58.02";
+    sha256_64bit = "sha256-xctt4TPRlOJ6r5S54h5W6PT6/3Zy2R4ASNFPu8TSHKM=";
+    sha256_aarch64 = "sha256-8hyRiGB+m2hL3c9MDA/Pon+Xl6E788MZ50WrrAGUVuY=";
+    openSha256 = "sha256-8hyRiGB+m2hL3c9MDA/Pon+Xl6E788MZ50WrrAGUVuY=";
+    settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
+    persistencedSha256 = "sha256-xctt4TPRlOJ6r5S54h5W6PT6/3Zy2R4ASNFPu8TSHKM=";
+  };
 
   hardware.nvidia.prime = {
     sync.enable = true;
@@ -100,21 +101,27 @@ in
     NIXOS_OZONE_WL = "1";
   };
 
-  # https://github.com/NixOS/nixpkgs/issues/221035
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
 
   hardware.bluetooth.enable = true;
 
-  services.xserver = {
-    enable = true;
-    desktopManager = { xterm.enable = false; };
+  services = {
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      desktopManager = { xterm.enable = false; };
+    };
 
     libinput.enable = true;
     displayManager.sddm.enable = true;
     displayManager.sessionPackages = [ pkgs.hyprland ];
     displayManager.defaultSession = "hyprland";
   };
-  programs.hyprland.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   virtualisation.docker = {
     enable = true;
@@ -137,6 +144,4 @@ in
 
   # virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "janhencic" ];
-
-  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
 }
