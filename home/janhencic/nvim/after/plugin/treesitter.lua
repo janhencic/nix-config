@@ -15,7 +15,7 @@ local parsers = {
   'vimdoc',
   'hyprlang',
   'markdown',
-  'markdown_inline'
+  'markdown_inline',
 }
 
 require('nvim-treesitter.configs').setup({
@@ -29,7 +29,6 @@ require('nvim-treesitter.configs').setup({
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
-
 
   highlight = {
     -- `false` will disable the whole extension
@@ -68,6 +67,5 @@ require('treesitter-context').setup({
 })
 
 vim.filetype.add({
-  pattern = { [".*/hyprland/.*%.conf"] = "hyprlang" },
+  pattern = { ['.*/hyprland/.*%.conf'] = 'hyprlang' },
 })
-

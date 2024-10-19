@@ -59,7 +59,7 @@ M.gopls = {}
 M.sqls = {}
 
 M.omnisharp = {
-  cmd = { "OmniSharp" },
+  cmd = { 'OmniSharp' },
 }
 
 -- I'm going to use ccls instead
@@ -88,14 +88,14 @@ end
 -- This function is active for all files with an LSP server attached, assuming the feature is supported.
 -- Files with LSP servers that do not support document highlighting are explicitly excluded.
 local function cursor_hold_callback()
-  if not is_in_list(vim.o.filetype, { "terraform", "sql" }) then
+  if not is_in_list(vim.o.filetype, { 'terraform', 'sql' }) then
     vim.lsp.buf.document_highlight()
   end
 end
 
 -- Activates `vim.lsp.buf.clear_references` whenever the cursor is moved.
 local function cursor_moved_callback()
-  if not is_in_list(vim.o.filetype, { "terraform", "sql" }) then
+  if not is_in_list(vim.o.filetype, { 'terraform', 'sql' }) then
     vim.lsp.buf.clear_references()
   end
 end
@@ -137,7 +137,7 @@ M.action = {
   function()
     vim.lsp.buf.code_action()
   end,
-  'run lsp code_action'
+  'run lsp code_action',
 }
 
 return M

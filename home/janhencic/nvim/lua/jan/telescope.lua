@@ -39,7 +39,7 @@ M.lsp_references = {
 
 local function live_grep_git_repo()
   local cwd = vim.loop.cwd()
-  local cmd = { "git", "rev-parse", "--show-toplevel", '-C', cwd }
+  local cmd = { 'git', 'rev-parse', '--show-toplevel', '-C', cwd }
 
   local output = vim.fn.systemlist(cmd)
 
@@ -48,7 +48,7 @@ end
 
 M.live_grep_git_repo = {
   live_grep_git_repo,
-  'Live grep git repository'
+  'Live grep git repository',
 }
 
 M.live_grep = {

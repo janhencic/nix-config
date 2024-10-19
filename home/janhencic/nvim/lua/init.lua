@@ -60,7 +60,6 @@ function M.run(js_debugger_path)
 
   jan.set_colorscheme()
   jan.create_autocmd()
-
 end
 
 return M

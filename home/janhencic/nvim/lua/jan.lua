@@ -2,7 +2,7 @@ local M = {}
 
 local neogit = require('neogit')
 
--- I miss Magit :( 
+-- I miss Magit :(
 M.open_neogit = {
   function()
     neogit.open()
