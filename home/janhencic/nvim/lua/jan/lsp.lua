@@ -1,4 +1,5 @@
 local jan_telescope = require('telescope')
+local telescope_builtin = require('telescope.builtin')
 
 local M = {}
 
@@ -139,12 +140,12 @@ M.keybinds = {
   },
   {
     '<leader>ld',
-    jan_telescope.lsp_definitions,
+    telescope_builtin.lsp_definitions,
     desc = 'Show LSP variable definitions with telescope',
   },
   {
     '<leader>lr',
-    jan_telescope.lsp_references,
+    telescope_builtin.lsp_references,
     desc = 'Show LSP variable references with telescope',
   },
   {
