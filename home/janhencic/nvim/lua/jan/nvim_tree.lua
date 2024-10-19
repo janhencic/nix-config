@@ -56,15 +56,12 @@ function M.on_attach(bufnr)
   })
 end
 
-M.open_current_dir = {
-  function()
-    vim.cmd('NvimTreeToggle')
-    local cwd = vim.fn.getcwd()
-    api.tree.open(cwd)
-    api.tree.change_root(cwd)
-  end,
-  'Open nvim-tree in current working directory',
-}
+M.open_current_dir = function()
+  vim.cmd('NvimTreeToggle')
+  local cwd = vim.fn.getcwd()
+  api.tree.open(cwd)
+  api.tree.change_root(cwd)
+end
 
 M.open = {
   function()

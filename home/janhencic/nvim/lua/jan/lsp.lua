@@ -1,3 +1,5 @@
+local jan_telescope = require('telescope')
+
 local M = {}
 
 -- TODO: confirm if this is correct
@@ -112,32 +114,46 @@ function M.create_lsp_cursorhold_autocmd()
   )
 end
 
-M.rename = {
-  function()
-    vim.lsp.buf.rename()
-  end,
-  'rename all references to the symbol under the cursor',
-}
-
-M.hover = {
-  function()
-    vim.lsp.buf.hover()
-  end,
-  'display hover information about the symbol under the cursor',
-}
-
-M.declaration = {
-  function()
-    vim.lsp.buf.declaration()
-  end,
-  'jump to the declaration of the symbol under the cursor',
-}
-
-M.action = {
-  function()
-    vim.lsp.buf.code_action()
-  end,
-  'run lsp code_action',
+M.keybinds = {
+  { '<leader>l', group = 'lsp' },
+  {
+    '<leader>lD',
+    function()
+      vim.lsp.buf.declaration()
+    end,
+    desc = 'Jump to the declaration of the symbol under the cursor',
+  },
+  {
+    '<leader>lR',
+    function()
+      vim.lsp.buf.rename()
+    end,
+    desc = 'Rename all references to the symbol under the cursor',
+  },
+  {
+    '<leader>la',
+    function()
+      vim.lsp.buf.code_action()
+    end,
+    desc = 'Run LSP code action',
+  },
+  {
+    '<leader>ld',
+    jan_telescope.lsp_definitions,
+    desc = 'Show LSP variable definitions with telescope',
+  },
+  {
+    '<leader>lr',
+    jan_telescope.lsp_references,
+    desc = 'Show LSP variable references with telescope',
+  },
+  {
+    '<leader>lv',
+    function()
+      vim.lsp.buf.hover()
+    end,
+    desc = 'Display hover information about the symbol under the cursor',
+  },
 }
 
 return M

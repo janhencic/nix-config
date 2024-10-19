@@ -23,21 +23,7 @@ function M.command_history_keymap()
   end)
 end
 
-M.lsp_definitions = {
-  function()
-    telescope_builtin.lsp_definitions()
-  end,
-  'Show lsp variable definitions with telescope',
-}
-
-M.lsp_references = {
-  function()
-    telescope_builtin.lsp_references()
-  end,
-  'Show lsp variable refferences with telescope',
-}
-
-local function live_grep_git_repo()
+function M.live_grep_git_repo()
   local cwd = vim.loop.cwd()
   local cmd = { 'git', 'rev-parse', '--show-toplevel', '-C', cwd }
 
@@ -45,45 +31,5 @@ local function live_grep_git_repo()
 
   telescope_builtin.live_grep({ cwd = output[1] })
 end
-
-M.live_grep_git_repo = {
-  live_grep_git_repo,
-  'Live grep git repository',
-}
-
-M.live_grep = {
-  function()
-    telescope_builtin.live_grep()
-  end,
-  'Live grep cwd',
-}
-
-M.find_files = {
-  function()
-    telescope_builtin.find_files()
-  end,
-  'Find file in cwd',
-}
-
-M.commands = {
-  function()
-    telescope_builtin.commands()
-  end,
-  'List all available commands',
-}
-
-M.oldfiles = {
-  function()
-    telescope_builtin.oldfiles()
-  end,
-  'Open recently opened files',
-}
-
-M.git_files = {
-  function()
-    telescope_builtin.git_files()
-  end,
-  'Fuzzy find git files',
-}
 
 return M

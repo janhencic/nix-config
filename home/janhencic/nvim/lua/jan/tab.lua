@@ -1,82 +1,83 @@
-local M = {}
+require('table')
 
-local keybinds_table = {
-  name = 'tab',
-  n = {
-    function()
-      vim.cmd('tabnew')
-    end,
-    'Open new tab',
-  },
-}
+local M = {}
 
 -- An arbitrary number
 local max_allowed_tabs = 9
 
 local function open_tab_index_keybind(index)
   return {
+    '<leader><tab>' .. index,
     function()
       vim.cmd('tabn ' .. index)
     end,
-    'Move to tab ' .. index,
+    desc = 'Move to tab ' .. index,
   }
 end
 
+local which_key_window_keybinds = {
+  { '<leader>w', group = 'window' },
+  {
+    '<leader>ws',
+    function()
+      vim.cmd('split')
+    end,
+    desc = 'horizontal split',
+  },
+  {
+    '<leader>wv',
+    function()
+      vim.cmd('vsplit')
+    end,
+    desc = 'vertical split',
+  },
+  {
+    '<leader>wd',
+    function()
+      vim.cmd('q')
+    end,
+    desc = 'close current splt',
+  },
+  {
+    '<leader>wl',
+    function()
+      vim.cmd('wincmd l')
+    end,
+    desc = 'Move to right split',
+  },
+  {
+    '<leader>wh',
+    function()
+      vim.cmd('wincmd h')
+    end,
+    desc = 'Move to left split',
+  },
+  {
+    '<leader>wj',
+    function()
+      vim.cmd('wincmd j')
+    end,
+    desc = 'Move to bottom split',
+  },
+  {
+    '<leader>wk',
+    function()
+      vim.cmd('wincmd k')
+    end,
+    desc = 'Move to top split',
+  },
+}
+
+local which_key_tab_keybinds = {
+  { '<leader>tab', group = 'tab' },
+}
+
 function M.keybinds()
   for index = 1, max_allowed_tabs do
-    keybinds_table[tostring(index)] = open_tab_index_keybind(index)
+    table.insert(which_key_tab_keybinds, open_tab_index_keybind(index))
   end
 
-  return keybinds_table
+  return table.merge_lists(which_key_tab_keybinds, which_key_window_keybinds)
 end
-
-M.horizontal_split = {
-  function()
-    vim.cmd('split')
-  end,
-  'horizontal split',
-}
-
-M.vertical_split = {
-  function()
-    vim.cmd('vsplit')
-  end,
-  'vertical split',
-}
-
-M.close_split = {
-  function()
-    vim.cmd('q')
-  end,
-  'close current splt',
-}
-
-M.move_right = {
-  function()
-    vim.cmd('wincmd l')
-  end,
-  'Move to right split',
-}
-
-M.move_left = {
-  function()
-    vim.cmd('wincmd h')
-  end,
-  'Move to left split',
-}
-
-M.move_down = {
-  function()
-    vim.cmd('wincmd j')
-  end,
-  'Move to bottom split',
-}
-
-M.move_up = {
-  function()
-    vim.cmd('wincmd k')
-  end,
-  'Move to top split',
-}
 
 return M

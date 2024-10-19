@@ -1,35 +1,8 @@
 local M = {}
 
-local neogit = require('neogit')
-
--- I miss Magit :(
-M.open_neogit = {
-  function()
-    neogit.open()
-  end,
-  'Open Neogit',
-}
-
-M.cargo_check = {
-  function()
-    vim.cmd('split term://cargo check')
-  end,
-  'Run Cargo check',
-}
-
-M.open_terminal = {
-  function()
-    vim.cmd('term')
-  end,
-  'Open terminal',
-}
-
-M.toggle_undo_tree = {
-  function()
-    vim.cmd('UndotreeToggle')
-  end,
-  'Toggle Undo tree',
-}
+local jan_nvim_tree = require('jan.nvim_tree')
+local api = require('nvim-tree.api')
+local telescope_builtin = require('telescope.builtin')
 
 M.set_colorscheme = function()
   vim.cmd('colorscheme tokyonight-moon')
@@ -71,5 +44,46 @@ M.create_autocmd = function()
     group = file_type,
   })
 end
+
+M.keybinds = {
+  {
+    '<leader>,',
+    function()
+      api.tree.close()
+    end,
+    desc = 'Close nvim-tree',
+    group = 'tree_close',
+  },
+  {
+    '<leader>.',
+    jan_nvim_tree.open_current_dir,
+    desc = 'Open nvim-tree in current working directory',
+    group = 'tree_open',
+  },
+  {
+    '<leader><space>',
+    function()
+      telescope_builtin.git_files()
+    end,
+    desc = 'Fuzzy find git files',
+    group = 'git_files',
+  },
+  {
+    '<leader>c',
+    function()
+      telescope_builtin.commands()
+    end,
+    desc = 'List all available commands',
+    group = 'commands',
+  },
+  {
+    '<leader>u',
+    function()
+      vim.cmd('UndotreeToggle')
+    end,
+    desc = 'Toggle Undo tree',
+    group = 'undo',
+  },
+}
 
 return M
