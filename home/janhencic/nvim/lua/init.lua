@@ -25,6 +25,7 @@ function M.run()
   keybinds = table.merge_lists(keybinds, jan_search.keybinds)
   keybinds = table.merge_lists(keybinds, jan_tab.keybinds())
   keybinds = table.merge_lists(keybinds, jan_terminal.keybinds)
+  keybinds = table.merge_lists(keybinds, jan_set.keybinds)
 
   wk.add(keybinds)
 
