@@ -2,6 +2,9 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      env = {
+        TERM = "alacritty-direct";
+      };
       window = {
         padding = {
           x = 0;
