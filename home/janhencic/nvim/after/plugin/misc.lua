@@ -31,3 +31,5 @@ require('neoscroll').setup({
 })
 
 require('render-markdown').setup({})
+
+require('ufo').setup()

@@ -42,6 +42,7 @@ in pkgs.neovim.override {
         neoscroll-nvim
         render-markdown-nvim
         vim-table-mode
+        nvim-ufo
 
         # The contents of ~/.config/nvim is packaged as a nvim plugin.
         myConfig
