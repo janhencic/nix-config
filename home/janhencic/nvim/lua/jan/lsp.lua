@@ -77,6 +77,8 @@ M.ccls = {
 
 M.terraform_lsp = {}
 
+M.terraform_ls = {}
+
 local function is_in_list(value, list)
   for _, v in ipairs(list) do
     if v == value then
@@ -87,18 +89,20 @@ local function is_in_list(value, list)
   return false
 end
 
+local cursor_hold_exclude_list = { 'sql', 'terraform' }
+
 -- Triggers `vim.lsp.buf.document_highlight` when the cursor is held stationary at a single location.
 -- This function is active for all files with an LSP server attached, assuming the feature is supported.
 -- Files with LSP servers that do not support document highlighting are explicitly excluded.
 local function cursor_hold_callback()
-  if not is_in_list(vim.o.filetype, { 'terraform', 'sql' }) then
+  if not is_in_list(vim.o.filetype, cursor_hold_exclude_list) then
     vim.lsp.buf.document_highlight()
   end
 end
 
 -- Activates `vim.lsp.buf.clear_references` whenever the cursor is moved.
 local function cursor_moved_callback()
-  if not is_in_list(vim.o.filetype, { 'terraform', 'sql' }) then
+  if not is_in_list(vim.o.filetype, cursor_hold_exclude_list) then
     vim.lsp.buf.clear_references()
   end
 end
