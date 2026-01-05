@@ -61,9 +61,13 @@ M.gopls = {}
 
 M.sqls = {}
 
+M.ruby_lsp = {}
+
 M.omnisharp = {
   cmd = { 'OmniSharp' },
 }
+
+M.fish_lsp = {}
 
 -- I'm going to use ccls instead
 -- M.clangd = {}
@@ -158,6 +162,13 @@ M.keybinds = {
       vim.lsp.buf.hover()
     end,
     desc = 'Display hover information about the symbol under the cursor',
+  },
+  {
+    '<leader>li',
+    function()
+      telescope_builtin.lsp_implementations()
+    end,
+    desc = 'Show LSP implementations',
   },
 }
 

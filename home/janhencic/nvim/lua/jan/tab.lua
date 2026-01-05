@@ -68,8 +68,19 @@ local which_key_window_keybinds = {
   },
 }
 
+vim.opt.termguicolors = true
+require('tabby').setup({})
+
+
 local which_key_tab_keybinds = {
   { '<leader>tab', group = 'tab' },
+  {
+    '<leader><tab>n',
+    function()
+      vim.cmd('tabnew')
+    end,
+    desc = 'open new tab',
+  },
 }
 
 function M.keybinds()

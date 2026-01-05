@@ -6,13 +6,14 @@ in with pkgs; [
   alacritty
   pass
   git
-  sumneko-lua-language-server
+  lua-language-server
   selene
   gcc
   ripgrep
   awscli
   nil
-  (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  pkgs.nerd-fonts.fira-code
+  pkgs.nerd-fonts.droid-sans-mono
   jan_nvim
   tree
   tmux
@@ -26,13 +27,6 @@ in with pkgs; [
   just
   pkgs-unstable.protobuf
 
-  pkgs-unstable.cargo
-  pkgs-unstable.rust-analyzer
-  pkgs-unstable.rustc
-  pkgs-unstable.rustfmt
-
-  # pkgs-unstable.rustup
-
   pkgs-unstable.natscli
 
   pkgs-unstable.skaffold
@@ -40,7 +34,7 @@ in with pkgs; [
   # pkgs-unstable.minikube
   # pkgs-unstable.kubectl
 
-  pkgs-unstable.nodejs
+  # pkgs-unstable.nodejs
   pkgs-unstable.typescript
 
   pkgs-unstable.postgresql_jit
@@ -49,4 +43,6 @@ in with pkgs; [
 
   pkgs-unstable.pgrok
   pkgs-unstable.acpi
+  pkgs-unstable.fish-lsp
+  pkgs.tvbeat-ssh
 ]

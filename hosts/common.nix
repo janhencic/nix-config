@@ -5,6 +5,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
 
+  boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
+
   networking = {
     # Define the bridge
     # bridges.br0.interfaces = [ "eno1" ];
@@ -37,7 +39,7 @@
   environment.pathsToLink = [ "/libexec" ];
 
   # Enable sound.
-  sound.enable = true;
+  # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -73,16 +75,9 @@
   hardware.nvidia.modesetting.enable = true;
 
   hardware.opengl.enable = true;
-  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-    version = "555.58.02";
-    sha256_64bit = "sha256-xctt4TPRlOJ6r5S54h5W6PT6/3Zy2R4ASNFPu8TSHKM=";
-    sha256_aarch64 = "sha256-8hyRiGB+m2hL3c9MDA/Pon+Xl6E788MZ50WrrAGUVuY=";
-    openSha256 = "sha256-8hyRiGB+m2hL3c9MDA/Pon+Xl6E788MZ50WrrAGUVuY=";
-    settingsSha256 = "sha256-ZpuVZybW6CFN/gz9rx+UJvQ715FZnAOYfHn5jt5Z2C8=";
-    persistencedSha256 = "sha256-xctt4TPRlOJ6r5S54h5W6PT6/3Zy2R4ASNFPu8TSHKM=";
-  };
+  hardware.nvidia.open = false;
 
   hardware.nvidia.prime = {
     sync.enable = true;
@@ -101,7 +96,7 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_11;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware.bluetooth.enable = true;
 
@@ -144,4 +139,38 @@
 
   # virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "janhencic" ];
+
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "50-zsa";
+      text = ''
+        # Rules for Oryx web flashing and live training
+        KERNEL=="hidraw*", ATTRS{idVendor}=="16c0", MODE="0664", GROUP="plugdev"
+        KERNEL=="hidraw*", ATTRS{idVendor}=="3297", MODE="0664", GROUP="plugdev"
+
+        # Legacy rules for live training over webusb (Not needed for firmware v21+)
+          # Rule for all ZSA keyboards
+          SUBSYSTEM=="usb", ATTR{idVendor}=="3297", GROUP="plugdev"
+          # Rule for the Moonlander
+          SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
+          # Rule for the Ergodox EZ
+          SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="1307", GROUP="plugdev"
+          # Rule for the Planck EZ
+          SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="6060", GROUP="plugdev"
+
+        # Wally Flashing rules for the Ergodox EZ
+        ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", ENV{ID_MM_DEVICE_IGNORE}="1"
+        ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789A]?", ENV{MTP_NO_PROBE}="1"
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789ABCD]?", MODE:="0666"
+        KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:="0666"
+
+        # Keymapp / Wally Flashing rules for the Moonlander and Planck EZ
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="0666", SYMLINK+="stm32_dfu"
+        # Keymapp Flashing rules for the Voyager
+        SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
+      '';
+
+      destination = "/etc/udev/rules.d/50-zsa.rules";
+    })
+  ];
 }

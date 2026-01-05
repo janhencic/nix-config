@@ -2,17 +2,19 @@
   description = "My NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nil.url = "github:oxalica/nil";
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    tvbeat-ssh.url = "github:janhencic/tvbeat-ssh";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nil }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nil, nix-index-database, tvbeat-ssh }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -28,12 +30,12 @@
       nixosConfigurations = {
         pc = nixpkgs.lib.nixosSystem {
           system = "${system}";
-          specialArgs = { inherit inputs pkgs-unstable; };
+          specialArgs = { inherit inputs pkgs-unstable tvbeat-ssh; };
           modules = [ ./hosts/pc ];
         };
         laptop = nixpkgs.lib.nixosSystem {
           system = "${system}";
-          specialArgs = { inherit inputs pkgs-unstable; };
+          specialArgs = { inherit inputs pkgs-unstable tvbeat-ssh; };
           modules = [ ./hosts/laptop ];
         };
       };

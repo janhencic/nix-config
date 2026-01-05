@@ -1,16 +1,35 @@
 local jan_lsp = require('jan.lsp')
 
-require('lspconfig')['lua_ls'].setup(jan_lsp.setup_lua)
-require('lspconfig')['rust_analyzer'].setup(jan_lsp.setup_ts)
-require('lspconfig')['ts_ls'].setup(jan_lsp.setup_ts)
-require('lspconfig')['bashls'].setup(jan_lsp.bashls)
-require('lspconfig')['pyright'].setup(jan_lsp.pyright)
-require('lspconfig')['nil_ls'].setup(jan_lsp.nil_ls)
-require('lspconfig')['intelephense'].setup(jan_lsp.intelephense)
-require('lspconfig')['ccls'].setup(jan_lsp.ccls)
-require('lspconfig')['terraformls'].setup(jan_lsp.terraform_ls)
-require('lspconfig')['gopls'].setup(jan_lsp.terraform_lsp)
-require('lspconfig')['sqls'].setup(jan_lsp.sqls)
-require('lspconfig')['omnisharp'].setup(jan_lsp.omnisharp)
+vim.lsp.config("lua_ls",         jan_lsp.setup_lua)
+vim.lsp.config("rust_analyzer",  jan_lsp.setup_ts)
+vim.lsp.config("ts_ls",          jan_lsp.setup_ts)
+vim.lsp.config("bashls",         jan_lsp.bashls)
+vim.lsp.config("pyright",        jan_lsp.pyright)
+vim.lsp.config("nil_ls",         jan_lsp.nil_ls)
+vim.lsp.config("intelephense",   jan_lsp.intelephense)
+vim.lsp.config("ccls",           jan_lsp.ccls)
+vim.lsp.config("terraformls",    jan_lsp.terraform_ls)
+vim.lsp.config("gopls",          jan_lsp.gopls)
+vim.lsp.config("sqls",           jan_lsp.sqls)
+vim.lsp.config("omnisharp",      jan_lsp.omnisharp)
+vim.lsp.config("fish_lsp",       jan_lsp.fish_lsp)
+vim.lsp.config("ruby_lsp",       jan_lsp.fish_lsp)
+
+vim.lsp.enable({
+  "lua_ls",
+  "rust_analyzer",
+  "ts_ls",
+  "bashls",
+  "pyright",
+  "nil_ls",
+  "intelephense",
+  "ccls",
+  "terraformls",
+  "gopls",
+  "sqls",
+  "omnisharp",
+  "fish_lsp",
+  "ruby_lsp",
+})
 
 jan_lsp.create_lsp_cursorhold_autocmd()

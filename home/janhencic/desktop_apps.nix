@@ -1,10 +1,16 @@
 { pkgs, pkgs-unstable }:
 
-with pkgs; [
+let
+  google-chrome = (pkgs-unstable.google-chrome.override {
+    commandLineArgs =
+      [ "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" ];
+  });
+in with pkgs; [
   chromium
   deluge
   pavucontrol
   pkgs-unstable.slack
-  pkgs-unstable.google-chrome
+  google-chrome
+
   pkgs-unstable.postman
 ]

@@ -16,6 +16,7 @@ local parsers = {
   'hyprlang',
   'markdown',
   'markdown_inline',
+  'fish',
 }
 
 require('nvim-treesitter.configs').setup({
